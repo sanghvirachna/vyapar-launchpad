@@ -45,7 +45,7 @@ const OnBoardingPages: React.FC = () => {
     if(step == 1 && subStep < 2){
       setSubStep(subStep + 1);
     }
-    else if(step == 2 && subStep < 2){
+    else if(step == 2 && subStep < 3){
       setSubStep(subStep + 1);
     }
      else {

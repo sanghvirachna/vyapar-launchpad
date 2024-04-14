@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-// Importing the image (if needed)
-// import Search from '../../../images/search.png';
+import { useDispatch,useSelector } from 'react-redux';
+import { setLanguage } from '../../../redux/slice';
+import { RootState } from '../../../redux/store';
 
 const SearchLang: React.FC = () => {
-  // Indian languages data (dummy data for demonstration)
+  const dispatch = useDispatch();
+  
+
   const indianLanguages: string[] = [
     'Hindi',
     'Bengali',
@@ -65,6 +68,9 @@ const SearchLang: React.FC = () => {
   const handleClick = (language: string): void => {
     setClickedText(language);
     setSearchResult(language);
+    dispatch(setLanguage(language));
+   
+
   };
 
   return (

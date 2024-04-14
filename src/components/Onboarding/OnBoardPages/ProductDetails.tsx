@@ -1,17 +1,25 @@
-import React, { ChangeEvent } from 'react';
- // assuming RootState is defined in your Redux setup
+import React, { ChangeEvent ,useEffect,useState} from 'react';
+import { useDispatch ,useSelector} from 'react-redux';
+import { setProductDetails } from '../../../redux/slice';
+import { RootState } from '../../../redux/store';
 
 const ProductDetails: React.FC = () => {
-  
-  let products: string[] = [];
+  const dispatch = useDispatch();
+  const [productTitle, setProductTitle] = useState('');
+const [productPricing, setProductPricing] = useState(0);
 
-  const handleProductChange = (event: ChangeEvent<HTMLInputElement>, productIndex: number) => {
-    products[productIndex] = event.target.value;
-  };
 
-  const handleBlur = () => {
-    
-  };
+
+const handleSave = () => {
+  dispatch(setProductDetails({
+    title: productTitle,
+    pricing: productPricing,
+    description: '', // set to empty string by default
+    variations: '', // set to empty array by default
+    images: [], // set to empty array by default
+  }));
+ 
+};
 
   return (
     <div className='px-16'>
@@ -19,9 +27,21 @@ const ProductDetails: React.FC = () => {
       <p className="text-[#6F6C90] font-poppins text-md">Enter details of the product for listing.</p>
       <div className='mt-4 font-poppins'>
         <label className="block  text-[#170F49] text-md font-medium mb-2">Product Title </label>
-        <input placeholder="Enter your product title..." className="w-full border-2 border-[#EFF0F6] rounded-2xl px-4 py-2" onChange={(event) => handleProductChange(event, 0)} onBlur={handleBlur} />
+        <input
+  placeholder="Enter your product title..."
+  value={productTitle}
+  onChange={(event) => setProductTitle(event.target.value)}
+  onBlur={handleSave}
+  className="w-full border-2 border-[#EFF0F6] rounded-2xl px-4 py-2"
+/>
         <label className="block  text-[#170F49] text-md font-medium mb-2 mt-4">Pricing  </label>
-        <input placeholder="Enter pricing of the product." className="w-full border-2 border-[#EFF0F6] rounded-2xl px-4 py-2" onChange={(event) => handleProductChange(event, 1)} onBlur={handleBlur} />
+        <input
+  placeholder="Enter pricing of the product."
+  value={productPricing}
+  onChange={(event) => setProductPricing(Number(event.target.value))}
+  onBlur={handleSave}
+  className="w-full border-2 border-[#EFF0F6] rounded-2xl px-4 py-2"
+/>
       </div>
     </div>
   );
