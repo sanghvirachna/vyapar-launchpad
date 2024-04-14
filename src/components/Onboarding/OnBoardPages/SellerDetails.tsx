@@ -4,7 +4,7 @@ import mail from "../../../images/Onboarding/mail.svg";
 import Marketing from "../../../images/Onboarding/call.svg";
 import Company from "../../../images/Onboarding/company.svg";
 
-const ContactDetails = () => {
+const SellerDetails = () => {
     return (
         <div className='px-16 h-[20rem] '>
             <h1 className="text-[#170F49] text-2xl mb-2 font-poppins font-bold">Seller’s Detail</h1>
@@ -45,4 +45,4 @@ const ContactDetails = () => {
     );
 };
 
-export default ContactDetails;
+export default SellerDetails;

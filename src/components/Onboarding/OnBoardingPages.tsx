@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import Stepper from './Stepper';
-import Contactdetails from './OnBoardPages/Contactdetails';
-import Companydetails from './OnBoardPages/Companydetails';
-import Companytype from './OnBoardPages/Companytype';
+import SellerDetails from './OnBoardPages/SellerDetails';
+import ProductDescription from './OnBoardPages/ProductDescription';
 import Companyupload from './OnBoardPages/Companyupload';
 import SearchLang from './OnBoardPages/SearchLang';
+import ProductImages from './OnBoardPages/ProductImages';
+import ProductVariations from './OnBoardPages/ProductVariations';
 import ProductDetails from './OnBoardPages/ProductDetails';
 
 interface CompanyInfoProps {
@@ -14,10 +15,24 @@ interface CompanyInfoProps {
 const CompanyInfo: React.FC<CompanyInfoProps> = ({ subStep }) => {
   return (
     <>
-      {subStep === 1 && <Contactdetails />}
-      {subStep === 2 && <Companydetails />}
-      {subStep === 3 && <Companytype />}
-      {subStep === 4 && <Companyupload />}
+      {subStep === 1 && <ProductDetails />}
+      {subStep === 2 && <ProductDescription />}
+      {subStep === 3 && <ProductVariations />}
+      
+    </>
+  );
+};
+
+interface SearchInfoProps {
+  subStep: number;
+}
+
+const SearchInfo: React.FC<SearchInfoProps> = ({ subStep }) => {
+  return (
+    <>
+      {subStep === 1 && <SearchLang />}
+      {subStep === 2 && <SellerDetails />}
+
     </>
   );
 };
@@ -27,19 +42,20 @@ const OnBoardingPages: React.FC = () => {
   const [subStep, setSubStep] = useState<number>(1);
 
   const handleNext = () => {
-    if (step === 2) {
-      if (subStep < 4) {
-        setSubStep(subStep + 1);
-      } else {
-        setStep(step + 1);
-      }
-    } else if (step < 4) {
+    if(step == 1 && subStep < 2){
+      setSubStep(subStep + 1);
+    }
+    else if(step == 2 && subStep < 2){
+      setSubStep(subStep + 1);
+    }
+     else {
       setStep(step + 1);
+      setSubStep(1);
     }
   };
 
   const handlePrevious = () => {
-    if (step === 2 && subStep > 1) {
+    if ((step === 1 || step === 2) && subStep > 1) {
       setSubStep(subStep - 1);
     } else if (step > 1) {
       setStep(step - 1);
@@ -54,16 +70,16 @@ const OnBoardingPages: React.FC = () => {
             <Stepper currentStep={step} />
           </header>
           <main className="flex-grow p-4">
-            {step === 1 && <SearchLang />}
+            {step === 1 && <SearchInfo subStep={subStep} />}
             {step === 2 && <CompanyInfo subStep={subStep} />}
-            {step === 3 && <ProductDetails />}
-            {step === 4 && <ProductDetails />}
+            {step === 3 && <Companyupload />}
+            {step === 4 && <ProductImages />}
           </main>
           <footer className="flex font-poppins justify-between mx-14 p-4">
             <button
               onClick={handlePrevious}
               className={`bg-[#FCBD01] text-white border-2 font-bold border-[#FCBD01] rounded-3xl px-4 py-3 ${
-                step === 1 ? 'invisible' : 'visible'
+                step === 1 && subStep === 1 ? 'invisible' : 'visible'
               }`}
             >
               Previous step
@@ -82,3 +98,4 @@ const OnBoardingPages: React.FC = () => {
 };
 
 export default OnBoardingPages;
+  

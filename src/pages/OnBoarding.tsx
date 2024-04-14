@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Stepper from '../components/Onboarding/Stepper.tsx';
-import Contactdetails from '../components/Onboarding/OnBoardPages/Contactdetails.tsx';
-import Companydetails from '../components/Onboarding/OnBoardPages/Companydetails.tsx';
+import Contactdetails from '../components/Onboarding/OnBoardPages/SellerDetails.tsx';
+import Companydetails from '../components/Onboarding/OnBoardPages/ProductDescription.tsx';
 import Companytype from '../components/Onboarding/OnBoardPages/Companytype.tsx';
 import Companyupload from '../components/Onboarding/OnBoardPages/Companyupload.tsx';
 import SearchLang from '../components/Onboarding/OnBoardPages/SearchLang.jsx';

@@ -5,7 +5,7 @@ import Loader from './common/Loader';
 import PageTitle from './components/PageTitle';
 import SignIn from './pages/Authentication/SignIn';
 import SignUp from './pages/Authentication/SignUp';
-import Player from './pages/Player';
+
 import Chart from './pages/Chart';
 import ECommerce from './pages/Dashboard/ECommerce';
 import FormElements from './pages/Form/FormElements';
@@ -38,7 +38,7 @@ function App() {
           index
           element={
             <>
-              <PageTitle title="eCommerce Dashboard " />
+              <PageTitle title="Vyapar Launchpad " />
               <ECommerce />
             </>
           }
@@ -47,20 +47,12 @@ function App() {
           path="/dashboard"
           element={
             <>
-              <PageTitle title="eCommerce Dashboard " />
+              <PageTitle title="Vyapar Launchpad " />
               <ECommerce />
             </>
           }
         />
-        <Route
-          path="/calendar"
-          element={
-            <>
-              <PageTitle title="Calendar " />
-              <Player />
-            </>
-          }
-        />
+        
         <Route
           path="/onboarding"
           element={
