@@ -62,7 +62,7 @@ function App() {
           }
         />
         <Route
-          path="/OnBoarding"
+          path="/onboarding"
           element={
             <>
               <PageTitle title="OnBoarding " />

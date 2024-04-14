@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 
-const Stepper: React.FC = () => {
-  const [progress, setProgress] = useState<number>(1);
+interface StepperProps {
+  currentStep: number;
+}
 
-  const stepCompleted = (stepNumber: number): boolean => {
-    return stepNumber <= progress;
-  };
-
+const Stepper: React.FC<StepperProps> = ({ currentStep }) => {
   return (
     <div>
-      <div className="w-full pt-4">
+      <div className="w-full py-6">
         <div className="flex">
-          {[1, 2, 3, 4].map((stepNumber: number) => (
+          {[1, 2, 3, 4].map((stepNumber) => (
             <div key={stepNumber} className="w-1/4">
-              <div className="relative">
+              <div className="relative mb-2">
                 <div
                   className="absolute flex align-center items-center align-middle content-center"
                   style={{
@@ -22,25 +20,34 @@ const Stepper: React.FC = () => {
                     transform: 'translate(-50%, -50%)',
                   }}
                 >
-                  {stepCompleted(stepNumber - 1) && (
+                  {stepNumber > currentStep && (
                     <div
-                      className={`w-full bg-[#FCBD01] py-1 rounded ${
-                        stepNumber === progress ? '' : 'bg-[#FCBD01]'
-                      } `}
-                      style={{ width: `${(stepNumber - 1) * 33.33}%` }}
+                      className="w-full bg-[#EFF0F6] py-1 rounded"
+                      style={{ width: '100%' }}
+                    />
+                  )}
+                  {stepNumber <= currentStep && stepNumber > 1 && (
+                    <div
+                      className="w-full bg-[#FCBD01] py-1 rounded"
+                      style={{
+                        width:
+                          currentStep === 2 && stepNumber === 3
+                            ? '50%'
+                            : '100%',
+                      }}
                     />
                   )}
                 </div>
                 <div
                   className={`w-10 h-10 mx-auto ${
-                    stepCompleted(stepNumber)
+                    stepNumber < currentStep
                       ? 'bg-[#FCBD01]'
-                      : 'bg-gray-200 border-2 border-gray-200'
-                  } rounded-full text-lg text-white flex items-center`}
+                      : stepNumber === currentStep
+                      ? 'bg-[#FCBD01] border-2 border-[#FCBD01] text-white'
+                      : 'bg-[#EFF0F6] text-[#6F6C90]'
+                  } rounded-full text-lg  flex items-center`}
                 >
-                  <span className="text-center text-white w-full">
-                    {stepNumber}
-                  </span>
+                  <span className="text-center  w-full">{stepNumber}</span>
                 </div>
               </div>
             </div>
